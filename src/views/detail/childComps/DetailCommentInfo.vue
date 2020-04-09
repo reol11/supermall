@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div v-if="Object.keys(commentInfo).length !== 0" class="comment-info">
       <div class="info-header">
         <div class="header-title">用户评价</div>
@@ -15,15 +14,15 @@
       <div class="info-detail">
         <p>{{commentInfo.content}}</p>
         <div class="info-other">
-          <span class="date">{{commentInfo.created | showDate}}</span>
+          <span class="date">{{commentInfo.created}}</span>
           <span>{{commentInfo.style}}</span>
         </div>
         <div class="info-imgs">
-          <img :src="item" v-for="(item, index) in commentInfo.images">
+          <img :src="item" v-for="(item, index) in commentInfo.images" :key="index">
         </div>
       </div>
     </div>
-  </div>
+
 </template>
 
 <script>
@@ -33,7 +32,10 @@
 		name: "DetailCommentInfo",
     props: {
 		  commentInfo: {
-		    type: Object,
+        type: Object,
+        default(){
+          return {}
+        }
       }
     },
     filters: {
